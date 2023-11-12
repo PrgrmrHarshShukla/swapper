@@ -1,34 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import 'viewerjs/dist/viewer.css';
-import Viewer from 'viewerjs';
+import React, { useState } from 'react';
+import '@fortawesome/fontawesome-free/css/all.css'
 
 const PDFViewer = () => {
   
   const [pdfUrl, setPdfUrl] = useState<string | undefined>("");
   const [file, setFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState<string>("");
   const [show, setShow] = useState<boolean>(false);
-
-
-  // useEffect(() => {
-  //   const canvas = document.getElementById('pdf-canvas') as HTMLCanvasElement;
-  //   const viewer = new Viewer(canvas, {
-  //       inline: true,
-  //       viewed() {
-  //         viewer.zoomTo(1);
-  //       },
-  //     });
-  
-  //     return () => {
-  //       viewer.destroy();
-  //     };
-  // }, [pdfUrl]);
-
-
+  const [showE, setShowE] = useState<boolean>(true);
+  const [showC, setShowC] = useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<boolean>(true);
+  const [pdfHeight, setPdfHeight] = useState<string>("h-[88vh] w-[98vw]");
+  const [mainDivDimensions, setMainDivDimensions] = useState<string>("w-[98vw] h-auto mx-[1vw] my-[1vh]");
 
 
   const getFileLocation= (e: React.ChangeEvent<HTMLInputElement>) => {
       const selectedFile = e.target.files && e.target.files[0];
       setFile(selectedFile);
+      setFileName(selectedFile.name);
   }
 
   const renderPDF = () => {
@@ -52,22 +41,59 @@ const PDFViewer = () => {
     }
   }
 
-  return (
-    <div className="w-[98vw] h-auto mx-[1vw] my-[1vh] flex flex-col gap-[1vh] justify-center items-center">
+  const handleExpand = () => {
+    if(file){
+      setMainDivDimensions("w-[100vw] h-[100vh] mx-0 my-0");
+      setPdfHeight("h-[100vh]  w-[100vw]")
+      setShowMenu(false);
+    }
+    setShowE(false);
+    setShowC(true);
+  }
 
-      <div className="border-2 border-gray-400 rounded-[10px] w-[98vw] h-[9vh] flex flex-row justify-around items-center">
-        <input type="file" onChange={getFileLocation}/>
-        <button onClick={renderPDF} className="border-2 border-gray-500 rounded-[9px] bg-blue-200 px-4 py-1 font-semibold hover:bg-blue-300 active:bg-blue-400">Render</button>
+  const handleCompress = () => {
+    setMainDivDimensions("w-[98vw] h-auto mx-[1vw] my-[1vh]");
+    setPdfHeight("h-[88vh] w-[98vw]")
+    setShowMenu(true);
+    setShowC(false);
+    setShowE(true);
+  }
+
+  const resetPdf = () => {
+    location.reload();
+    setFile(null);
+    setPdfUrl("");
+  }
+
+  return (
+    <div className={`${mainDivDimensions} flex flex-col gap-[1vh] justify-center items-center`}>
+
+      <div className={`${showMenu ? "block" : "hidden"} border-2 border-black rounded-[10px] w-[98vw] h-[9vh] flex flex-row justify-around items-center`}>
+        <div className="flex flex-row justify-center items-center gap-[1vw]">
+          <label htmlFor="file-input" className="border-2 border-black rounded-[9px] bg-blue-200 px-4 py-1 font-semibold hover:bg-blue-300 active:bg-blue-400">Choose File</label>
+          <input id="file-input" style={{ display: 'none' }} type="file" onChange={getFileLocation}/>
+          <input type="text" placeholder="File Name" className="bg-blue-200 px-2 py-1 border-2 border-black rounded-[9px] w-[30vw] sm:w-[50vw] text-black" value={fileName} />
+        </div>
+        <div className="flex flex-row justify-center items-center gap-[1vw]">
+          <button onClick={renderPDF} className="border-2 border-black rounded-[9px] bg-blue-200 px-4 py-1 font-semibold hover:bg-blue-300 active:bg-blue-400">Render</button>
+          <button onClick={resetPdf} className="border-2 border-black rounded-[9px] bg-red-200 px-4 py-1 font-semibold hover:bg-red-300 active:bg-red-400">Reset</button>
+        </div>
       </div>
 
 
-      <div className="flex flex-col gap-[1vh] justify-center items-center  w-[98vw] h-[88vh]">
-        <p className={`${show ? "hidden" : "block"}`}>Nothing to show</p>
-        {/* <div 
-          id="colorSwapper"
-        ></div> */}
+      <div className={`flex flex-col gap-[1vh] justify-center items-center ${pdfHeight} `}>
+        <p className={`${show ? "hidden" : "block"} h-[88vh] text-black font-semibold`}>Nothing to show</p>
         <embed id="pdf-canvas" src={pdfUrl} type="application/pdf" width="100%" height="100%" />
       </div>
+
+      <div className={`${showE ? "block" : "hidden"}  fixed z-30 translate-y-[46vh] translate-x-[47vw] w-12 h-12 border-2 border-black rounded-full flex flex-col justify-center items-center hover:bg-blue-300 active:bg-blue-400 bg-blue-200`} onClick={handleExpand}>
+        <i className={`fas fa-expand`}></i>
+      </div>
+      <div className={`${showC ? 'block' : 'hidden'} fixed z-30 translate-y-[46vh] translate-x-[47vw] w-12 h-12 border-2 border-black rounded-full flex flex-col justify-center items-center hover:bg-blue-300 active:bg-blue-400 bg-blue-200`} onClick={handleCompress}>
+        <i className={`fas fa-compress`}></i>
+      </div>
+
+
     </div>
   );
 };
