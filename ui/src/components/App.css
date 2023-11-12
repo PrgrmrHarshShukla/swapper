@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#colorSwapper {
+    position: absolute;
+    top: 18.5vh; /* Adjust the top position as needed */
+    left: 1vw; /* Adjust the left position as needed */
+    width: 98vw; /* Adjust the width as needed */
+    height: 8vh; /* Adjust the height as needed */
+    background-color: rgba(133, 133, 219, 0.303); /* Initial background color */
+    color: white; /* Initial text color */
+}
