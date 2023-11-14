@@ -88,10 +88,10 @@ const PDFViewer = () => {
         <embed id="pdf-canvas" src={pdfUrl} type="application/pdf" width="100%" height="100%" />
       </div>
 
-      <div className={`${showE ? "block" : "hidden"}  fixed z-30 translate-y-[46vh] translate-x-[47vw] w-12 h-12 border-2 border-black rounded-full flex flex-col justify-center items-center hover:bg-blue-300 active:bg-blue-400 bg-blue-200`} onClick={handleExpand}>
+      <div className={`${showE ? "block" : "hidden"}  fixed z-30 translate-y-[42vh] translate-x-[38vw] sm:translate-y-[46vh] sm:translate-x-[47vw] w-12 h-12 border-2 border-black rounded-full flex flex-col justify-center items-center hover:bg-blue-300 active:bg-blue-400 bg-blue-200`} onClick={handleExpand}>
         <i className={`fas fa-expand`}></i>
       </div>
-      <div className={`${showC ? 'block' : 'hidden'} fixed z-30 translate-y-[46vh] translate-x-[47vw] w-12 h-12 border-2 border-black rounded-full flex flex-col justify-center items-center hover:bg-blue-300 active:bg-blue-400 bg-blue-200`} onClick={handleCompress}>
+      <div className={`${showC ? 'block' : 'hidden'} fixed z-30 translate-y-[42vh] translate-x-[38vw] sm:translate-y-[46vh] sm:translate-x-[47vw] w-12 h-12 border-2 border-black rounded-full flex flex-col justify-center items-center hover:bg-blue-300 active:bg-blue-400 bg-blue-200`} onClick={handleCompress}>
         <i className={`fas fa-compress`}></i>
       </div>
 

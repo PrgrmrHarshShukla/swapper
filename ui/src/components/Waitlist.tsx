@@ -18,7 +18,7 @@ function Waitlist() {
                 email: email
             }
             localStorage.setItem("dark-mode-pdf-email", email);
-            const user = await axios.post("http://localhost:5000/swapperUsers/register", userDataPostReq);
+            const user = await axios.post("https://yt-connect-backend.onrender.com/swapperUsers/register", userDataPostReq);
             if(user.status == 201){
                 navigate('/view');
             }
