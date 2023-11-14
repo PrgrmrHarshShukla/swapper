@@ -20,19 +20,19 @@ const PDFViewer = () => {
       if(selectedFile){
         setFile(selectedFile);
         setFileName(selectedFile.name);
+        setShowButton(false);
       }
   }
 
   const renderPDF = () => {
     if(file){
       setShow(true);
-      setShowButton(false);
 
       // converting the File to a data url
       const fileReader = new FileReader();
       fileReader.onloadend = () => {
         const dataUrl = fileReader.result as string;
-        // console.log("Data URL:", dataUrl);  
+        console.log("Data URL:", dataUrl);  
         setPdfUrl(dataUrl);
       };
 
@@ -91,7 +91,9 @@ const PDFViewer = () => {
 
       <div className={`z-10 flex flex-col gap-[1vh] justify-center items-center ${pdfHeight} `}>
         <p className={`${show ? "hidden" : "block"} h-[88vh] text-black font-semibold`}>{'After selecting your pdf, click "Render"'}</p>
-        <embed className={`${show ? "block" : "hidden"}`} id="pdf-canvas" src={pdfUrl} type="application/pdf" width="100%" height="100%" />
+        <iframe src={pdfUrl}   width="100%" height="100%" className={`${show ? "block" : "hidden"}`} id="pdf-canvas" ></iframe>
+        {/* <iframe className={`${show ? "block" : "hidden"}`} id="pdf-canvas" src={`https://mozilla.github.io/pdf.js/web/viewer.html?file=${pdfUrl}`}  width="100%" height="100%"></iframe> */}
+        {/* <embed className={`${show ? "block" : "hidden"}`} id="pdf-canvas" src={pdfUrl} type="application/pdf" width="100%" height="100%" /> */}
       </div>
 
       <div className={`${showE ? "block" : "hidden"}  fixed z-30 translate-y-[42vh] translate-x-[38vw] sm:translate-y-[46vh] sm:translate-x-[47vw] w-12 h-12 border-2 border-black rounded-full flex flex-col justify-center items-center hover:bg-blue-300 active:bg-blue-400 bg-blue-200`} onClick={handleExpand}>
