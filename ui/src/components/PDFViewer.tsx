@@ -9,6 +9,7 @@ const PDFViewer = () => {
   const [show, setShow] = useState<boolean>(false);
   const [showE, setShowE] = useState<boolean>(true);
   const [showC, setShowC] = useState<boolean>(false);
+  const [showButton, setShowButton] = useState<boolean>(true);
   const [showMenu, setShowMenu] = useState<boolean>(true);
   const [pdfHeight, setPdfHeight] = useState<string>("h-[88vh] w-[98vw]");
   const [mainDivDimensions, setMainDivDimensions] = useState<string>("w-[98vw] h-auto mx-[1vw] my-[1vh]");
@@ -25,6 +26,7 @@ const PDFViewer = () => {
   const renderPDF = () => {
     if(file){
       setShow(true);
+      setShowButton(false);
 
       // converting the File to a data url
       const fileReader = new FileReader();
@@ -62,6 +64,7 @@ const PDFViewer = () => {
   }
 
   const resetPdf = () => {
+    setShowButton(true);
     location.reload();
     setFile(null);
     setPdfUrl("");
@@ -71,15 +74,18 @@ const PDFViewer = () => {
     <div className={`${mainDivDimensions} flex flex-col gap-[1vh] justify-center items-center overflow-y-hidden`}>
 
       <div className={`${showMenu ? "block" : "hidden"} border-2 border-black rounded-[10px] w-[98vw] h-[9vh] flex flex-row justify-around items-center`}>
+
         <div className="flex flex-row justify-center items-center gap-[1vw]">
-          <label htmlFor="file-input" className="border-2 border-black rounded-[9px] bg-blue-200 px-4 py-1 font-semibold hover:bg-blue-300 active:bg-blue-400">Choose File</label>
+          <label htmlFor="file-input" className={` ${showButton ? "block" : "hidden"} border-2 border-black rounded-[9px] bg-blue-200 sm:px-4 px-1 py-1 sm:font-semibold hover:bg-blue-300 active:bg-blue-400`}>Choose File</label>
           <input id="file-input" style={{ display: 'none' }} type="file" onChange={getFileLocation}/>
-          <input type="text" placeholder="File Name" className="bg-blue-200 px-2 py-1 border-2 border-black rounded-[9px] w-[30vw] sm:w-[50vw] text-black" value={fileName} />
+          <input type="text" placeholder="File Name" className={` ${showButton ? "hidden" : "block"} bg-blue-200 px-2 py-1 border-2 border-black rounded-[9px] max-w-[30vw] sm:max-w-[50vw] sm:w-[50vw] text-black`} value={fileName} />
         </div>
+
         <div className="flex flex-row justify-center items-center gap-[1vw]">
           <button onClick={renderPDF} className="border-2 border-black rounded-[9px] bg-blue-200 px-4 py-1 font-semibold hover:bg-blue-300 active:bg-blue-400">Render</button>
           <button onClick={resetPdf} className="border-2 border-black rounded-[9px] bg-red-200 px-4 py-1 font-semibold hover:bg-red-300 active:bg-red-400">Reset</button>
         </div>
+
       </div>
 
 
