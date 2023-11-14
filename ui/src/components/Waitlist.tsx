@@ -38,7 +38,7 @@ function Waitlist() {
         <div className="h-screen w-screen flex flex-col justify-center items-center">
             <div className="flex flex-col items-center border-black border-2 border-solid max-w-[300px] w-[50vw] min-w-[250px] text-center gap-12 p-2 rounded-[10px] py-12">
 
-                <strong className="text-2xl w-[140px] sm:w-full" id="joinHead"><u>Free Access 1 Month</u></strong>
+                <strong className="text-2xl w-[140px] sm:w-full" id="joinHead"><u>Free Trial</u></strong>
 
 
                 <div className=" flex flex-col justify-center text-left">
