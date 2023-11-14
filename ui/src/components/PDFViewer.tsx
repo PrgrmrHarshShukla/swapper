@@ -76,7 +76,7 @@ const PDFViewer = () => {
       <div className={`${showMenu ? "block" : "hidden"} border-2 border-black rounded-[10px] w-[98vw] h-[9vh] flex flex-row justify-around items-center`}>
 
         <div className="flex flex-row justify-center items-center gap-[1vw]">
-          <label htmlFor="file-input" className={` ${showButton ? "block" : "hidden"} border-2 border-black rounded-[9px] bg-blue-200 sm:px-4 px-1 py-1 sm:font-semibold hover:bg-blue-300 active:bg-blue-400`}>Choose File</label>
+          <label htmlFor="file-input" className={` ${showButton ? "block" : "hidden"} border-2 border-black rounded-[9px] bg-blue-200 px-4 py-1 sm:font-semibold hover:bg-blue-300 active:bg-blue-400`}>Choose File</label>
           <input id="file-input" style={{ display: 'none' }} type="file" onChange={getFileLocation}/>
           <input type="text" placeholder="File Name" className={` ${showButton ? "hidden" : "block"} bg-blue-200 px-2 py-1 border-2 border-black rounded-[9px] max-w-[30vw] sm:max-w-[50vw] sm:w-[50vw] text-black`} value={fileName} />
         </div>
