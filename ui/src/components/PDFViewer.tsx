@@ -68,7 +68,7 @@ const PDFViewer = () => {
   }
 
   return (
-    <div className={`${mainDivDimensions} flex flex-col gap-[1vh] justify-center items-center`}>
+    <div className={`${mainDivDimensions} flex flex-col gap-[1vh] justify-center items-center overflow-y-hidden`}>
 
       <div className={`${showMenu ? "block" : "hidden"} border-2 border-black rounded-[10px] w-[98vw] h-[9vh] flex flex-row justify-around items-center`}>
         <div className="flex flex-row justify-center items-center gap-[1vw]">
@@ -83,9 +83,9 @@ const PDFViewer = () => {
       </div>
 
 
-      <div className={`flex flex-col gap-[1vh] justify-center items-center ${pdfHeight} `}>
+      <div className={`z-10 flex flex-col gap-[1vh] justify-center items-center ${pdfHeight} `}>
         <p className={`${show ? "hidden" : "block"} h-[88vh] text-black font-semibold`}>{'After selecting your pdf, click "Render"'}</p>
-        <embed id="pdf-canvas" src={pdfUrl} type="application/pdf" width="100%" height="100%" />
+        <embed className={`${show ? "block" : "hidden"}`} id="pdf-canvas" src={pdfUrl} type="application/pdf" width="100%" height="100%" />
       </div>
 
       <div className={`${showE ? "block" : "hidden"}  fixed z-30 translate-y-[42vh] translate-x-[38vw] sm:translate-y-[46vh] sm:translate-x-[47vw] w-12 h-12 border-2 border-black rounded-full flex flex-col justify-center items-center hover:bg-blue-300 active:bg-blue-400 bg-blue-200`} onClick={handleExpand}>

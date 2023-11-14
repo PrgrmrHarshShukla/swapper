@@ -10,7 +10,7 @@ function Waitlist() {
     const navigate = useNavigate();
 
     const joinWaitlist = async () => {
-        if(localStorage.getItem("dark-mode-pdf-email")){
+        if(localStorage.getItem("dark-mode-pdf-email") !== ""){
             navigate('/view');
         }
         else if(email){

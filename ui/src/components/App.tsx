@@ -7,7 +7,7 @@ import Unaccessible from './Unaccessible'
 
 function App() {
 
-  const protectedPath = localStorage.getItem("dark-mode-pdf-email") ? <PDFViewer /> : <Unaccessible />
+  const protectedPath = localStorage.getItem("dark-mode-pdf-email") !== "" ? <PDFViewer /> : <Unaccessible />
   
 
   return (
