@@ -14,7 +14,7 @@ const PDFViewer = () => {
   const [mainDivDimensions, setMainDivDimensions] = useState<string>("w-[98vw] h-auto mx-[1vw] my-[1vh]");
 
 
-  const getFileLocation= (e: React.ChangeEvent<HTMLInputElement>) => {
+  const getFileLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
       const selectedFile = e.target.files && e.target.files[0];
       if(selectedFile){
         setFile(selectedFile);
@@ -84,7 +84,7 @@ const PDFViewer = () => {
 
 
       <div className={`flex flex-col gap-[1vh] justify-center items-center ${pdfHeight} `}>
-        <p className={`${show ? "hidden" : "block"} h-[88vh] text-black font-semibold`}>Nothing to show</p>
+        <p className={`${show ? "hidden" : "block"} h-[88vh] text-black font-semibold`}>{'After selecting your pdf, click "Render"'}</p>
         <embed id="pdf-canvas" src={pdfUrl} type="application/pdf" width="100%" height="100%" />
       </div>
 
